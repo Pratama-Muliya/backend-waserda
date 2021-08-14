@@ -74,6 +74,8 @@ class UserController extends Controller
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'max:255', 'unique:users'],
+                'address' => ['required', 'string', 'max:100'],
+
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', new Password]
             ]);
@@ -81,6 +83,7 @@ class UserController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'address' =>$request->address,
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
             ]);
